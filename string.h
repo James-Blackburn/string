@@ -1,6 +1,10 @@
 #ifndef _LIB_STRING
 #define _LIB_STRING
 
+#ifndef _GLIBCXX_IOSTREAM
+#include <iostream>
+#endif
+
 namespace lib{
 
     class string{
@@ -28,9 +32,7 @@ namespace lib{
         inline void operator=(const char*);
         inline void operator=(const string&);
         inline char& operator[](size_type);
-        #ifdef _GLIBCXX_IOSTREAM
         inline friend std::ostream& operator<<(std::ostream&, string&);
-        #endif
     };
 
     string::string() :
@@ -115,10 +117,8 @@ namespace lib{
         reallocate(_string);
     }
 
-    #ifdef _GLIBCXX_IOSTREAM
     inline std::ostream& operator<<(std::ostream& out, string& str){
         return out << str.internal_string;
     }
-    #endif
 }
 #endif // _LIB_STRING INCLUDED
